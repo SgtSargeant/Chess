@@ -1,16 +1,20 @@
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.util.LinkedList;
 
 public class Tile {
 
     private Color colour;
     private JButton button;
     private Piece piece;
+    protected Coordinates coordinates;
+    private Boolean testBool = null;
 
-    public Tile(JButton b,Piece p){
+    public Tile(JButton b,Piece p,Coordinates c){
         this.button = b;
         this.piece = p;
+        this.coordinates = c;
         highlight();
         }
 
@@ -24,22 +28,29 @@ public class Tile {
         }
     }
 
+
+
     public void highlight(){
-        Color btnSecond = new Color(10,122,10);
+        Color altColour = new Color(10,122,10);
         button.addActionListener(new ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent e) 
             {
                 if(button.getBackground().equals(new Color(0,0,0)) || button.getBackground().equals(new Color(255,255,255))){
-                    button.setBackground(btnSecond);
+                    button.setBackground(altColour);
                 }
                 else{
                     button.setBackground(colour);
                 }
 
+                System.out.println(coordinates.x + " " + coordinates.y + " "  + piece.getTeam());
+
             }
             });
     }
 
+    public Boolean returning(){
+        return testBool;
+    }
     
     
     public void setIconing(){
@@ -53,4 +64,6 @@ public class Tile {
     public Piece getPiece(){
         return piece;
     }
+
+  
 }

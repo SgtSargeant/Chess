@@ -6,5 +6,9 @@ final class Coordinates {
         y = inY;
     }
 
+    public void l(){
+        System.out.println("");
+    }
+
     
 }

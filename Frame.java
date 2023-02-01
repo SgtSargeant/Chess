@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+
 public class Frame{
     private int size = 300;
     private JFrame frame = new JFrame();
     private Tile[][] tileGrid;
     private JButton[][] buttonGrid;
-    private GridLayout gl = new GridLayout(9,9);
+    private GridLayout gl = new GridLayout(8,8);
     
     private Icon blankPalePiece = new ImageIcon("C:/Users/james/OneDrive/Programming/Github/Chess/Images/Blank-Pale.png");
     private Icon blankBlackPiece = new ImageIcon("C:/Users/james/OneDrive/Programming/Github/Chess/Images/Blank-Black.png");
@@ -22,16 +23,25 @@ public class Frame{
 
         addButtons();
         populateBoard();
+        System.out.println(tileGrid[0][1].getClass());
+      
 
     }
 
     public void listen(){
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                tileGrid[i][j].getButton();
+        while(true){
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    if(tileGrid[i][j].isChosen != null){
+                    Boolean d = tileGrid[i][j].isChosen;
+                    System.out.println(d + " " + tileGrid[i][j].coordinates.x + " " + tileGrid[i][j].coordinates.y);
+                    }
+                }
             }
         }
     }
+
+    
 
 
     
@@ -56,6 +66,7 @@ public class Frame{
             
             
             tileGrid[i][j].getButton().setForeground(Color.gray);
+            
             frame.add(tileGrid[i][j].getButton());
             }
         }
@@ -124,6 +135,8 @@ public class Frame{
         tileGrid[7][3].getPiece().setTeam("White");
 
     }
+
+    
     
     
     

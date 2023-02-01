@@ -1,21 +1,22 @@
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.util.LinkedList;
 
-public class Tile {
+public class Tile extends JButton implements ActionListener{
 
     private Color colour;
     private JButton button;
     private Piece piece;
     protected Coordinates coordinates;
-    private Boolean testBool = null;
+    public  Boolean isChosen = null;
 
     public Tile(JButton b,Piece p,Coordinates c){
         this.button = b;
+        this.button.addActionListener(this);
         this.piece = p;
         this.coordinates = c;
-        highlight();
         }
 
     public void setTileColour(String a){
@@ -25,6 +26,7 @@ public class Tile {
         }else{
             colour = new Color(255,255,255);
             button.setBackground(colour); 
+           
         }
     }
 
@@ -32,26 +34,34 @@ public class Tile {
 
     public void highlight(){
         Color altColour = new Color(10,122,10);
-        button.addActionListener(new ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent e) 
-            {
+        //button.addActionListener(new ActionListener(){
+          //  public void actionPerformed(java.awt.event.ActionEvent e) 
+            //{
                 if(button.getBackground().equals(new Color(0,0,0)) || button.getBackground().equals(new Color(255,255,255))){
                     button.setBackground(altColour);
+                    isChosen = true;
                 }
                 else{
                     button.setBackground(colour);
+                    isChosen = true;
                 }
 
-                System.out.println(coordinates.x + " " + coordinates.y + " "  + piece.getTeam());
+               // System.out.println(coordinates.x + " " + coordinates.y + " "  + piece.getTeam());
 
-            }
-            });
-    }
-
-    public Boolean returning(){
-        return testBool;
+          //  }
+            //});
     }
     
+    @Override
+    public void actionPerformed(ActionEvent e){
+        Object obj= e.getSource();
+        
+        if(obj instanceof JButton){
+            JButton a = (JButton)obj;
+            a.setBackground(Color.yellow);
+        }
+
+    }
     
     public void setIconing(){
         button.setIcon(piece.getIcon());

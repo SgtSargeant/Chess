@@ -54,17 +54,30 @@ public class Frame implements ActionListener{
 
         board[0][0].setPiece(new Rook(null,"White"));
 
-        LinkedList<Coordinates> toHighlight = ((Rook) board[0][0].piece).getSpaces(new Coordinates(0,0));
-        for(int len = 0; len < toHighlight.size(); len++){
-            board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(Color.red);
-
-        }
+        
     }
+
+    private void highlightPieces(Coordinates buttonToHighlight){
+        LinkedList<Coordinates> toHighlight = ((Rook) board[0][0].piece).getSpaces(buttonToHighlight);
+        for(int len = 0; len < toHighlight.size(); len++){
+            board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(Color.cyan);
+        }
+
+        toHighlight.clear();
+    }
+
+    private void dehighlightPieces(Coordinates buttonToHighlight){
+        LinkedList<Coordinates> toHighlight = ((Rook) board[0][0].piece).getSpaces(buttonToHighlight);
+        for(int len = 0; len < toHighlight.size(); len++){
+            board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(board[toHighlight.get(len).x][toHighlight.get(len).y].getOriginalColour());
+        }
+
+        toHighlight.clear();
+    }
+    
 
     public void actionPerformed(ActionEvent e){
         buttonSelect(e);
-        
-        
     }
 
     private void buttonSelect(ActionEvent e){
@@ -72,14 +85,17 @@ public class Frame implements ActionListener{
         if(highlightedTile == null){
             highlightedTile = (Tile)obj;
             highlightedTile.setBackground(Color.cyan);
+            highlightPieces(highlightedTile.coordinates);
         }else{
             if(highlightedTile == (Tile)obj){
                 highlightedTile.setBackground(highlightedTile.getOriginalColour());
+                dehighlightPieces(highlightedTile.coordinates);
                 highlightedTile = null;
             }else{
                 System.out.println("Choose same tile again");
             }
         }
+
     }
         
     

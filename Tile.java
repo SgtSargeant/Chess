@@ -12,20 +12,25 @@ public class Tile extends JButton implements ActionListener{
     protected Coordinates coordinates;
     public  Boolean isChosen = null;
 
-    public Tile(JButton b,Piece p,Coordinates c){
+   /*  public Tile(JButton b,Piece p,Coordinates c){
         this.button = b;
         this.button.addActionListener(this);
         this.piece = p;
         this.coordinates = c;
-        }
+    }*/
 
-    public void setTileColour(String a){
-        if(a == "Black"){
+    public Tile(Piece p, Coordinates c){
+        super();
+        setTileColour(c);
+    }
+
+    public void setTileColour(Coordinates coor){
+        if((coor.x + coor.y) % 2 != 1){
             colour = new Color(0,0,0);
-            button.setBackground(colour); 
+            this.setBackground(colour); 
         }else{
             colour = new Color(255,255,255);
-            button.setBackground(colour); 
+            this.setBackground(colour); 
            
         }
     }

@@ -4,8 +4,14 @@ import java.awt.*;
 
 public class Frame{
     private int size = 300;
+
+    private Dimension tileSize = new Dimension(size/8,size/8);
+
     private JFrame frame = new JFrame();
     private Tile[][] tileGrid;
+
+    private Tile[][] board;
+    
     private JButton[][] buttonGrid;
     private GridLayout gl = new GridLayout(8,8);
     
@@ -14,65 +20,45 @@ public class Frame{
 
     public Frame(){
         tileGrid = new Tile[8][8];
-        
+        board = new Tile[8][8];
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         buttonGrid = new JButton[8][8]; 
         frame.setLayout(gl);
         frame.setSize(size,size);
         frame.setVisible(true);
 
-        addButtons();
+      
+
+       
+
+        //addButtons();
         populateBoard();
-        System.out.println(tileGrid[0][1].getClass());
+        
       
 
     }
 
-    public void listen(){
-        while(true){
-            for(int i = 0; i < 8; i++){
-                for(int j = 0; j < 8; j++){
-                    if(tileGrid[i][j].isChosen != null){
-                    Boolean d = tileGrid[i][j].isChosen;
-                    System.out.println(d + " " + tileGrid[i][j].coordinates.x + " " + tileGrid[i][j].coordinates.y);
-                    }
-                }
+    private void populateBoard(){
+        for(int x = 0; x < 8; x++){
+            for(int y = 0; y < 8; y++){
+                Tile tempTile = new Tile(null,new Coordinates(x, y));
+                board[x][y] = tempTile;
+                board[x][y].setSize(tileSize);
+                board[x][y].setForeground(Color.gray);
+                frame.add(board[x][y]);
             }
         }
     }
 
-    
-
 
     
-    public void addButtons(){
-        String piece = "";
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-            JButton tempButton = new JButton();
-            Piece tempP = new Piece("C:/Users/james/OneDrive/Programming/Github/Chess/Images/" + piece +".png","None");
-            tempButton.setSize(size/8,size/8);
 
-            tileGrid[i][j] = new Tile(tempButton,tempP,new Coordinates(i,j));    
-            if((i + j) % 2 != 1){
-                piece = "Blank-Pale";
-                tileGrid[i][j].setTileColour("");
-            }else{
-                piece = "Blank-Black";
-                tileGrid[i][j].setTileColour("Black");
-            }
-            
-            
-            
-            
-            tileGrid[i][j].getButton().setForeground(Color.gray);
-            
-            frame.add(tileGrid[i][j].getButton());
-            }
-        }
 
-    }
     
+   
+
+    
+    /* 
     private void populateBoard(){
         populateBlack();
         populateWhite();
@@ -134,7 +120,7 @@ public class Frame{
         tileGrid[7][3].getButton().setText("W-King");
         tileGrid[7][3].getPiece().setTeam("White");
 
-    }
+    }*/
 
     
     

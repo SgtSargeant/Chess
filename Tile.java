@@ -8,19 +8,15 @@ public class Tile extends JButton implements ActionListener{
 
     private Color colour;
     private JButton button;
-    private Piece piece;
+    public Piece piece;
     protected Coordinates coordinates;
     public  Boolean isChosen = null;
 
-   /*  public Tile(JButton b,Piece p,Coordinates c){
-        this.button = b;
-        this.button.addActionListener(this);
-        this.piece = p;
-        this.coordinates = c;
-    }*/
 
+ 
     public Tile(Piece p, Coordinates c){
         super();
+        this.coordinates = c;
         setTileColour(c);
     }
 
@@ -31,7 +27,6 @@ public class Tile extends JButton implements ActionListener{
         }else{
             colour = new Color(255,255,255);
             this.setBackground(colour); 
-           
         }
     }
 
@@ -76,8 +71,16 @@ public class Tile extends JButton implements ActionListener{
         return button;
     }
 
+    public void setPiece(Piece p){
+        piece = p;
+    }
+
     public Piece getPiece(){
         return piece;
+    }
+
+    public Color getOriginalColour(){
+        return colour;
     }
 
   

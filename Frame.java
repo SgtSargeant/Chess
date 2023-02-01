@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
-
-public class Frame{
+public class Frame implements ActionListener{
     private int size = 300;
 
     private Dimension tileSize = new Dimension(size/8,size/8);
-
+    private Tile highlightedTile;
     private JFrame frame = new JFrame();
     private Tile[][] tileGrid;
 
@@ -45,9 +47,46 @@ public class Frame{
                 board[x][y] = tempTile;
                 board[x][y].setSize(tileSize);
                 board[x][y].setForeground(Color.gray);
+                board[x][y].addActionListener(this);
                 frame.add(board[x][y]);
             }
         }
+
+        board[0][0].setPiece(new Rook(null,"White"));
+
+        LinkedList<Coordinates> toHighlight = ((Rook) board[0][0].piece).getSpaces(new Coordinates(0,0));
+        for(int len = 0; len < toHighlight.size(); len++){
+            board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(Color.red);
+
+        }
+    }
+
+    public void actionPerformed(ActionEvent e){
+        buttonSelect(e);
+        
+        
+    }
+
+    private void buttonSelect(ActionEvent e){
+        Object obj = e.getSource();
+        if(highlightedTile == null){
+            highlightedTile = (Tile)obj;
+            highlightedTile.setBackground(Color.cyan);
+        }else{
+            if(highlightedTile == (Tile)obj){
+                highlightedTile.setBackground(highlightedTile.getOriginalColour());
+                highlightedTile = null;
+            }else{
+                System.out.println("Choose same tile again");
+            }
+        }
+    }
+        
+    
+
+
+    private void implementMoves(String piece){
+        System.out.println(piece);
     }
 
 

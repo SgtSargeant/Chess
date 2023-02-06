@@ -49,16 +49,20 @@ public class Frame implements ActionListener{
                 board[x][y].setForeground(Color.gray);
                 board[x][y].addActionListener(this);
                 frame.add(board[x][y]);
+                board[x][y].setPiece(new Piece(null,"White"));
+                board[x][y].getPiece().setType("Bishop");
+                board[x][y].setText("Bishop");
             }
         }
 
-        board[0][0].setPiece(new Rook(null,"White"));
+        
+        
 
         
     }
 
     private void highlightPieces(Coordinates buttonToHighlight){
-        LinkedList<Coordinates> toHighlight = ((Rook) board[0][0].piece).getSpaces(buttonToHighlight);
+        LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
         for(int len = 0; len < toHighlight.size(); len++){
             board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(Color.cyan);
         }
@@ -67,7 +71,7 @@ public class Frame implements ActionListener{
     }
 
     private void dehighlightPieces(Coordinates buttonToHighlight){
-        LinkedList<Coordinates> toHighlight = ((Rook) board[0][0].piece).getSpaces(buttonToHighlight);
+        LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
         for(int len = 0; len < toHighlight.size(); len++){
             board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(board[toHighlight.get(len).x][toHighlight.get(len).y].getOriginalColour());
         }

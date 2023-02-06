@@ -50,7 +50,8 @@ public class Frame implements ActionListener{
                 board[x][y].addActionListener(this);
                 frame.add(board[x][y]);
                 board[x][y].setPiece(new Piece(null,"White"));
-                board[x][y].getPiece().setType(null);
+                board[x][y].getPiece().setType("no piece");
+                board[x][y].getPiece().setTeam("no team");
             }
         }
 
@@ -65,11 +66,21 @@ public class Frame implements ActionListener{
     private void highlightPieces(Coordinates buttonToHighlight){
         LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
         for(int len = 0; len < toHighlight.size(); len++){
+            Color highlightColour = Color.cyan;
+            System.out.println(toHighlight.get(len).x + " " + toHighlight.get(len).y);
+                
+
             try{
-            board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(Color.cyan);
+                if(board[toHighlight.get(len).x][toHighlight.get(len).y].getPiece().getTeam() == board[buttonToHighlight.x][buttonToHighlight.y].getPiece().getTeam()){
+                    highlightColour = Color.green;
+                }else{
+                    highlightColour = Color.red;
+                }
+            board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(highlightColour);
             }catch(Exception e){
-                System.out.println("Failed under");
+                System.out.println("Error" + e);
             }
+            board[buttonToHighlight.x][buttonToHighlight.y].setBackground(Color.magenta);
         }
 
         
@@ -81,7 +92,7 @@ public class Frame implements ActionListener{
         LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
         for(int len = 0; len < toHighlight.size(); len++){
             try{
-            board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(board[toHighlight.get(len).x][toHighlight.get(len).y].getOriginalColour());
+                board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(board[toHighlight.get(len).x][toHighlight.get(len).y].getOriginalColour());
             }catch(Exception e){
                 System.out.println("Failed under");
             }
@@ -131,9 +142,18 @@ public class Frame implements ActionListener{
     
     private void setPieces(){
         board[0][0].getPiece().setType("Rook"); 
+        board[0][0].getPiece().setTeam("Black");
         board[0][0].setText("Rook"); 
+        board[0][1].getPiece().setTeam("Black");
         board[0][1].getPiece().setType("Bishop");
         board[0][1].setText("Bishop");
+
+        board[1][1].getPiece().setType("Rook"); 
+        board[1][1].getPiece().setTeam("White");
+        board[1][1].setText("Rook"); 
+        board[2][1].getPiece().setTeam("White");
+        board[2][1].getPiece().setType("Bishop");
+        board[2][1].setText("Bishop");
     }
     /* 
     private void populateBlack(){

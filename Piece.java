@@ -35,7 +35,6 @@ public class Piece {
         System.out.println(type);
         switch(type){
             case "Bishop":
-            System.out.println("Bishop Clicked at" + c.x + "/" + c.y);
             
             for(int count = 0; count < 8; count++){
                 toReturn.add(new Coordinates((c.x + count), (c.y + count)));
@@ -43,7 +42,7 @@ public class Piece {
                 toReturn.add(new Coordinates((c.x - count), (c.y + count)));
                 toReturn.add(new Coordinates((c.x + count), (c.y - count)));
             }                 
-                
+
             break;
             case "Rook":
                 System.out.println("Rook Clicked");
@@ -54,7 +53,10 @@ public class Piece {
             break;
 
             default:
-            return null;
+            System.out.println(c.x + "" + c.y);
+                toReturn.add(c);
+                
+            
         }
         
 

@@ -50,10 +50,11 @@ public class Frame implements ActionListener{
                 board[x][y].addActionListener(this);
                 frame.add(board[x][y]);
                 board[x][y].setPiece(new Piece(null,"White"));
-                board[x][y].getPiece().setType("Bishop");
-                board[x][y].setText("Bishop");
+                board[x][y].getPiece().setType(null);
             }
         }
+
+        setPieces();
 
         
         
@@ -64,8 +65,14 @@ public class Frame implements ActionListener{
     private void highlightPieces(Coordinates buttonToHighlight){
         LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
         for(int len = 0; len < toHighlight.size(); len++){
+            try{
             board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(Color.cyan);
+            }catch(Exception e){
+                System.out.println("Failed under");
+            }
         }
+
+        
 
         toHighlight.clear();
     }
@@ -73,7 +80,11 @@ public class Frame implements ActionListener{
     private void dehighlightPieces(Coordinates buttonToHighlight){
         LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
         for(int len = 0; len < toHighlight.size(); len++){
+            try{
             board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(board[toHighlight.get(len).x][toHighlight.get(len).y].getOriginalColour());
+            }catch(Exception e){
+                System.out.println("Failed under");
+            }
         }
 
         toHighlight.clear();
@@ -117,12 +128,14 @@ public class Frame implements ActionListener{
    
 
     
-    /* 
-    private void populateBoard(){
-        populateBlack();
-        populateWhite();
+    
+    private void setPieces(){
+        board[0][0].getPiece().setType("Rook"); 
+        board[0][0].setText("Rook"); 
+        board[0][1].getPiece().setType("Bishop");
+        board[0][1].setText("Bishop");
     }
-
+    /* 
     private void populateBlack(){
         for(int count = 0; count < 8; count++){
             tileGrid[1][count].getButton().setText("B-Pawn");

@@ -36,22 +36,13 @@ public class Piece {
         switch(type){
             case "Bishop":
             System.out.println("Bishop Clicked at" + c.x + "/" + c.y);
-                
-             
-                int it = 0;
-
-                while(c.y + it < 8 || c.x + it < 8){
-           
-                    System.out.println(it + " " +  (c.x+it) + " " + (c.y+it));
-                    toReturn.add(new Coordinates((c.x+it),(c.y+it)));
-                    
-                    it++;
-                }
-                 
-                 
-                
-                    
-                  
+            
+            for(int count = 0; count < 8; count++){
+                toReturn.add(new Coordinates((c.x + count), (c.y + count)));
+                toReturn.add(new Coordinates((c.x - count), (c.y - count)));
+                toReturn.add(new Coordinates((c.x - count), (c.y + count)));
+                toReturn.add(new Coordinates((c.x + count), (c.y - count)));
+            }                 
                 
             break;
             case "Rook":

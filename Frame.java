@@ -55,8 +55,8 @@ public class Frame implements ActionListener{
             }
         }
 
-        setPieces();
-
+       
+        populateBlack();
         
         
 
@@ -67,14 +67,18 @@ public class Frame implements ActionListener{
         LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
         for(int len = 0; len < toHighlight.size(); len++){
             Color highlightColour = Color.cyan;
-            System.out.println(toHighlight.get(len).x + " " + toHighlight.get(len).y);
                 
 
             try{
                 if(board[toHighlight.get(len).x][toHighlight.get(len).y].getPiece().getTeam() == board[buttonToHighlight.x][buttonToHighlight.y].getPiece().getTeam()){
                     highlightColour = Color.green;
                 }else{
-                    highlightColour = Color.red;
+                    if(board[toHighlight.get(len).x][toHighlight.get(len).y].getPiece().getTeam() == "no team"){
+                        highlightColour = Color.cyan;
+                    }else{
+                        highlightColour = Color.red;
+                    }
+                    
                 }
             board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(highlightColour);
             }catch(Exception e){
@@ -118,102 +122,48 @@ public class Frame implements ActionListener{
                 dehighlightPieces(highlightedTile.coordinates);
                 highlightedTile = null;
             }else{
-                System.out.println("Choose same tile again");
+                Tile t = (Tile)obj;
+                if(t.getBackground() == Color.cyan || t.getBackground() == Color.red){
+                    System.out.println("Taking a Piece!");
+                    t.setBackground(highlightedTile.getBackground());
+                    t.setText(highlightedTile.getText());
+                    t.piece.setTeam(highlightedTile.piece.getTeam());
+                    t.piece.setType(highlightedTile.piece.getType());
+                    dehighlightPieces(highlightedTile.coordinates);
+                    highlightedTile.piece.setTeam("no team");
+                    highlightedTile.piece.setType("no type");
+                    highlightedTile.setText(null);
+                    highlightedTile.setBackground(highlightedTile.getOriginalColour());
+                    
+                    highlightedTile = null;
+                }
             }
         }
 
     }
-        
     
-
-
-    private void implementMoves(String piece){
-        System.out.println(piece);
+    private void setPiece(Coordinates c,String type, String team){
+        board[c.x][c.y].getPiece().setType(type); 
+        board[c.x][c.y].getPiece().setTeam(team);
+        board[c.x][c.y].setText(type + " " +team); 
     }
 
-
-    
-
-
-    
-   
-
-    
-    
-    private void setPieces(){
-        board[0][0].getPiece().setType("Rook"); 
-        board[0][0].getPiece().setTeam("Black");
-        board[0][0].setText("Rook"); 
-        board[0][1].getPiece().setTeam("Black");
-        board[0][1].getPiece().setType("Bishop");
-        board[0][1].setText("Bishop");
-
-        board[1][1].getPiece().setType("Rook"); 
-        board[1][1].getPiece().setTeam("White");
-        board[1][1].setText("Rook"); 
-        board[2][1].getPiece().setTeam("White");
-        board[2][1].getPiece().setType("Bishop");
-        board[2][1].setText("Bishop");
-    }
-    /* 
     private void populateBlack(){
-        for(int count = 0; count < 8; count++){
-            tileGrid[1][count].getButton().setText("B-Pawn");
-            tileGrid[1][count].getPiece().setTeam("Black");
-        }
         
-        tileGrid[0][0].getButton().setText("B-Rook");
-        tileGrid[0][0].getPiece().setTeam("Black");
-        tileGrid[0][7].getButton().setText("B-Rook");
-        tileGrid[0][7].getPiece().setTeam("Black");
+        setPiece(new Coordinates(0,0), "Rook", "White");
+        setPiece(new Coordinates(0,7), "Rook", "White");
 
-        tileGrid[0][1].getButton().setText("B-Knight");
-        tileGrid[0][1].getPiece().setTeam("Black");
-        tileGrid[0][6].getButton().setText("B-Knight");
-        tileGrid[0][6].getPiece().setTeam("Black");
+        setPiece(new Coordinates(7,0), "Rook", "Black");
+        setPiece(new Coordinates(7,7), "Rook", "Black");
 
-        tileGrid[0][2].getButton().setText("B-Bishop");
-        tileGrid[0][2].getPiece().setTeam("Black");
-        tileGrid[0][5].getButton().setText("B-Bishop");
-        tileGrid[0][5].getPiece().setTeam("Black");
-        
-        tileGrid[0][3].getButton().setText("B-Queen");
-        tileGrid[0][3].getPiece().setTeam("Black");
+        setPiece(new Coordinates(0,1), "Bishop", "White");
+        setPiece(new Coordinates(0,6), "Bishop", "White");
 
-        tileGrid[0][4].getButton().setText("B-King");
-        tileGrid[0][4].getPiece().setTeam("Black");
+        setPiece(new Coordinates(7,1), "Bishop", "Black");
+        setPiece(new Coordinates(7,6), "Bishop", "Black");
 
+        setPiece(new Coordinates(7,5), "Knight","Black");
     }
-
-    private void populateWhite(){
-        for(int count = 0; count < 8; count++){
-            tileGrid[6][count].getButton().setText("W-Pawn");
-            tileGrid[6][count].getPiece().setTeam("White");
-        }
-        
-        tileGrid[7][0].getButton().setText("W-Rook");
-        tileGrid[7][0].getPiece().setTeam("White");
-        tileGrid[7][7].getButton().setText("W-Rook");
-        tileGrid[7][7].getPiece().setTeam("White");
-
-        tileGrid[7][1].getButton().setText("W-Knight");
-        tileGrid[7][1].getPiece().setTeam("White");
-        tileGrid[7][6].getButton().setText("W-Knight");
-        tileGrid[7][6].getPiece().setTeam("White");
-
-        tileGrid[7][2].getButton().setText("W-Bishop");
-        tileGrid[7][2].getPiece().setTeam("White");
-        tileGrid[7][5].getButton().setText("W-Bishop");
-        tileGrid[7][5].getPiece().setTeam("White");
-        
-        tileGrid[7][4].getButton().setText("W-Queen");
-        tileGrid[7][4].getPiece().setTeam("White");
-
-        tileGrid[7][3].getButton().setText("W-King");
-        tileGrid[7][3].getPiece().setTeam("White");
-
-    }*/
-
     
     
     

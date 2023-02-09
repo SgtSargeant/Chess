@@ -27,6 +27,10 @@ public class Piece {
         return chessTeam;
     }
 
+    public String getType(){
+        return type;
+    }
+
     public Icon getIcon(){
         return pieceIcon;
     }
@@ -51,9 +55,18 @@ public class Piece {
                     toReturn.add(new Coordinates(c.x, i));
                 }
             break;
+            case "Knight":
+                toReturn.add(new Coordinates(c.x + 1, c.y + 2));
+                toReturn.add(new Coordinates(c.x + 1, c.y - 2));
+                toReturn.add(new Coordinates(c.x - 1, c.y + 2));
+                toReturn.add(new Coordinates(c.x - 1, c.y - 2));
 
+                toReturn.add(new Coordinates(c.x + 2, c.y + 1));
+                toReturn.add(new Coordinates(c.x + 2, c.y - 1));
+                toReturn.add(new Coordinates(c.x - 2, c.y + 1));
+                toReturn.add(new Coordinates(c.x - 2, c.y - 1));
+                
             default:
-            System.out.println(c.x + "" + c.y);
                 toReturn.add(c);
                 
             

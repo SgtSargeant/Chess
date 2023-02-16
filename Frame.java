@@ -5,34 +5,28 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 public class Frame implements ActionListener{
-    private int size = 300;
+    private int size = 600;
 
+    private String playerTurn = null;
     private Dimension tileSize = new Dimension(size/8,size/8);
     private Tile highlightedTile;
     private JFrame frame = new JFrame();
-    private Tile[][] tileGrid;
 
     private Tile[][] board;
     
-    private JButton[][] buttonGrid;
     private GridLayout gl = new GridLayout(8,8);
     
     private Icon blankPalePiece = new ImageIcon("C:/Users/james/OneDrive/Programming/Github/Chess/Images/Blank-Pale.png");
     private Icon blankBlackPiece = new ImageIcon("C:/Users/james/OneDrive/Programming/Github/Chess/Images/Blank-Black.png");
 
     public Frame(){
-        tileGrid = new Tile[8][8];
         board = new Tile[8][8];
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        buttonGrid = new JButton[8][8]; 
+       
         frame.setLayout(gl);
         frame.setSize(size,size);
         frame.setVisible(true);
-
-      
-
        
-
         //addButtons();
         populateBoard();
         
@@ -57,6 +51,7 @@ public class Frame implements ActionListener{
 
        
         populateBlack();
+        populateWhite();
         
         
 
@@ -64,7 +59,7 @@ public class Frame implements ActionListener{
     }
 
     private void highlightPieces(Coordinates buttonToHighlight){
-        LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
+        LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).testingMoves(buttonToHighlight,board);
         for(int len = 0; len < toHighlight.size(); len++){
             Color highlightColour = Color.cyan;
                 
@@ -98,7 +93,7 @@ public class Frame implements ActionListener{
             try{
                 board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(board[toHighlight.get(len).x][toHighlight.get(len).y].getOriginalColour());
             }catch(Exception e){
-                System.out.println("Failed under");
+                System.out.println("Error" + e);
             }
         }
 
@@ -108,6 +103,11 @@ public class Frame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         buttonSelect(e);
+
+        
+        
+        Tile s = (Tile)e.getSource();
+        System.out.println(s.getBackground());
     }
 
     private void buttonSelect(ActionEvent e){
@@ -149,22 +149,28 @@ public class Frame implements ActionListener{
     }
 
     private void populateBlack(){
-        
-        setPiece(new Coordinates(0,0), "Rook", "White");
-        setPiece(new Coordinates(0,7), "Rook", "White");
-
         setPiece(new Coordinates(7,0), "Rook", "Black");
         setPiece(new Coordinates(7,7), "Rook", "Black");
-
-        setPiece(new Coordinates(0,1), "Bishop", "White");
-        setPiece(new Coordinates(0,6), "Bishop", "White");
-
-        setPiece(new Coordinates(7,1), "Bishop", "Black");
-        setPiece(new Coordinates(7,6), "Bishop", "Black");
-
-        setPiece(new Coordinates(7,5), "Knight","Black");
+        setPiece(new Coordinates(7,4), "Rook", "White");
+     /*    setPiece(new Coordinates(7,2), "Bishop", "Black");
+        setPiece(new Coordinates(7,5), "Bishop", "Black");
+        setPiece(new Coordinates(7,6), "Knight","Black");
+        setPiece(new Coordinates(7,1), "Knight","Black");
+        setPiece(new Coordinates(7,4),"Queen","Black");
+        setPiece(new Coordinates(6,0),"Pawn","Black");*/
     }
     
+    private void populateWhite(){
+
+        setPiece(new Coordinates(0,0), "Rook", "White");
+        setPiece(new Coordinates(0,7), "Rook", "White");
+        setPiece(new Coordinates(4, 0), "Pawn", "White");
+        setPiece(new Coordinates(0,2), "Bishop", "White");
+        setPiece(new Coordinates(0,5), "Bishop", "White");
+        setPiece(new Coordinates(0,6), "Knight","White");
+        setPiece(new Coordinates(0,1), "Knight","White");
+
+    }
     
     
     

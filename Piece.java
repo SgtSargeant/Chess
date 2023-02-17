@@ -192,6 +192,16 @@ public class Piece {
                 toReturn.add(new Coordinates(c.x - 2, c.y + 1));
                 toReturn.add(new Coordinates(c.x - 2, c.y - 1));
             break;
+            case "King":
+                toReturn.add(new Coordinates(c.x + 1,c.y + 1));
+                toReturn.add(new Coordinates(c.x + 1,c.y - 1));
+                toReturn.add(new Coordinates(c.x - 1,c.y + 1));
+                toReturn.add(new Coordinates(c.x - 1,c.y - 1));
+                toReturn.add(new Coordinates(c.x + 1,c.y));
+                toReturn.add(new Coordinates(c.x,c.y + 1));
+                toReturn.add(new Coordinates(c.x,c.y - 1));
+                toReturn.add(new Coordinates(c.x - 1,c.y));
+            break;
         }
 
         return toReturn;

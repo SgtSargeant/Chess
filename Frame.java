@@ -151,13 +151,12 @@ public class Frame implements ActionListener{
     private void populateBlack(){
         setPiece(new Coordinates(7,0), "Rook", "Black");
         setPiece(new Coordinates(7,7), "Rook", "Black");
-        setPiece(new Coordinates(7,4), "Rook", "White");
-     /*   setPiece(new Coordinates(7,2), "Bishop", "Black");
+        setPiece(new Coordinates(7,2), "Bishop", "Black");
         setPiece(new Coordinates(7,5), "Bishop", "Black");
         setPiece(new Coordinates(7,6), "Knight","Black");
-        setPiece(new Coordinates(7,1), "Knight","Black");*/
+        setPiece(new Coordinates(7,1), "Knight","Black");
         setPiece(new Coordinates(7,4),"Queen","Black");
-      //  setPiece(new Coordinates(6,0),"Pawn","Black");*/
+       setPiece(new Coordinates(7,3),"King","Black");
     }
     
     private void populateWhite(){
@@ -169,6 +168,8 @@ public class Frame implements ActionListener{
         setPiece(new Coordinates(0,5), "Bishop", "White");
         setPiece(new Coordinates(0,6), "Knight","White");
         setPiece(new Coordinates(0,1), "Knight","White");
+        setPiece(new Coordinates(0,4),"Queen","White");
+        setPiece(new Coordinates(0,3),"King","White");
 
     }
     

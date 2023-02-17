@@ -10,6 +10,7 @@ public class Piece {
     private Icon pieceIcon;
     protected String type;
     private LinkedList<Coordinates> toReturn;
+    private int moves = 0;
 
     public Piece(String path, String team){
         dummyBoard = new int[8][8];
@@ -55,6 +56,43 @@ public class Piece {
     public LinkedList<Coordinates> testingMoves(Coordinates c,Tile[][] grid,String ty){
    
         switch(ty){
+            case "Pawn":
+                int direction = 0;
+                switch(grid[c.x][c.y].piece.chessTeam){
+                    case "Black":
+                        direction = -1;
+                    break;
+                    case "White":
+                        direction = 1;
+                    break;
+                }
+
+                
+                if(moves == 0){
+                    if(grid[c.x + direction][c.y].piece.chessTeam == "no team"){
+                        toReturn.add(new Coordinates(c.x + direction, c.y));
+                        moves++;
+                    }    
+                    if(grid[c.x + direction][c.y].piece.chessTeam == "no team"){
+                        toReturn.add(new Coordinates(c.x + (2*direction), c.y));
+                        moves++;
+                    }   
+                       
+                    
+                }else{
+                    if(grid[c.x + direction][c.y].piece.chessTeam == "no team"){
+                        toReturn.add(new Coordinates(c.x + direction, c.y));
+                    }    
+                }
+
+                if(grid[c.x + 1][c.y + (direction*1)].piece.chessTeam != grid[c.x][c.y].piece.chessTeam && grid[c.x + 1][c.y +  (direction*1)].piece.chessTeam != "no team"){
+                    toReturn.add(new Coordinates(c.x + 1,c.y + (direction*1)));
+                }
+                if(grid[c.x - 1][c.y + (direction*1)].piece.chessTeam != grid[c.x][c.y].piece.chessTeam && grid[c.x - 1][c.y +  (direction*1)].piece.chessTeam != "no team"){
+                    toReturn.add(new Coordinates(c.x - 1,c.y + (direction*1)));
+                }
+
+            break;
             case "Rook":
                 try{
                 for(int i = 1; i < 8; i++){

@@ -156,20 +156,27 @@ public class Frame implements ActionListener{
         setPiece(new Coordinates(7,6), "Knight","Black");
         setPiece(new Coordinates(7,1), "Knight","Black");
         setPiece(new Coordinates(7,4),"Queen","Black");
-       setPiece(new Coordinates(7,3),"King","Black");
+        setPiece(new Coordinates(7,3),"King","Black");
+        for(int i = 0; i < 8; i++){
+            setPiece(new Coordinates(6,i),"Pawn","Black");
+        }
     }
     
     private void populateWhite(){
 
         setPiece(new Coordinates(0,0), "Rook", "White");
         setPiece(new Coordinates(0,7), "Rook", "White");
-        setPiece(new Coordinates(4, 0), "Pawn", "White");
+    
         setPiece(new Coordinates(0,2), "Bishop", "White");
         setPiece(new Coordinates(0,5), "Bishop", "White");
         setPiece(new Coordinates(0,6), "Knight","White");
         setPiece(new Coordinates(0,1), "Knight","White");
         setPiece(new Coordinates(0,4),"Queen","White");
         setPiece(new Coordinates(0,3),"King","White");
+
+        for(int i = 0; i < 8; i++){
+            setPiece(new Coordinates(1,i),"Pawn","White");
+        }
 
     }
     

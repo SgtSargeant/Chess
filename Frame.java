@@ -59,7 +59,7 @@ public class Frame implements ActionListener{
     }
 
     private void highlightPieces(Coordinates buttonToHighlight){
-        LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).testingMoves(buttonToHighlight,board);
+        LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).testingMoves(buttonToHighlight,board,board[buttonToHighlight.x][buttonToHighlight.y].piece.type);
         for(int len = 0; len < toHighlight.size(); len++){
             Color highlightColour = Color.cyan;
                 
@@ -88,7 +88,7 @@ public class Frame implements ActionListener{
     }
 
     private void dehighlightPieces(Coordinates buttonToHighlight){
-        LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).getSpaces(buttonToHighlight);
+        LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).testingMoves(buttonToHighlight,board,board[buttonToHighlight.x][buttonToHighlight.y].piece.type);
         for(int len = 0; len < toHighlight.size(); len++){
             try{
                 board[toHighlight.get(len).x][toHighlight.get(len).y].setBackground(board[toHighlight.get(len).x][toHighlight.get(len).y].getOriginalColour());
@@ -152,12 +152,12 @@ public class Frame implements ActionListener{
         setPiece(new Coordinates(7,0), "Rook", "Black");
         setPiece(new Coordinates(7,7), "Rook", "Black");
         setPiece(new Coordinates(7,4), "Rook", "White");
-     /*    setPiece(new Coordinates(7,2), "Bishop", "Black");
+     /*   setPiece(new Coordinates(7,2), "Bishop", "Black");
         setPiece(new Coordinates(7,5), "Bishop", "Black");
         setPiece(new Coordinates(7,6), "Knight","Black");
-        setPiece(new Coordinates(7,1), "Knight","Black");
+        setPiece(new Coordinates(7,1), "Knight","Black");*/
         setPiece(new Coordinates(7,4),"Queen","Black");
-        setPiece(new Coordinates(6,0),"Pawn","Black");*/
+      //  setPiece(new Coordinates(6,0),"Pawn","Black");*/
     }
     
     private void populateWhite(){

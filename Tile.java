@@ -46,10 +46,7 @@ public class Tile extends JButton implements ActionListener{
                     isChosen = true;
                 }
 
-               // System.out.println(coordinates.x + " " + coordinates.y + " "  + piece.getTeam());
 
-          //  }
-            //});
     }
     
     @Override

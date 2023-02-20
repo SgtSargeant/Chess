@@ -5,10 +5,5 @@ final class Coordinates {
         x = inX;
         y = inY;
     }
-
-    public void l(){
-        System.out.println("");
-    }
-
     
 }

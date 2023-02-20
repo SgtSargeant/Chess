@@ -96,7 +96,7 @@ public class Frame implements ActionListener{
                 System.out.println("Error" + e);
             }
         }
-
+        
         toHighlight.clear();
     }
     
@@ -107,13 +107,14 @@ public class Frame implements ActionListener{
         
         
         Tile s = (Tile)e.getSource();
-        System.out.println(s.getBackground());
+     
     }
 
     private void buttonSelect(ActionEvent e){
         Object obj = e.getSource();
         if(highlightedTile == null){
             highlightedTile = (Tile)obj;
+            
             highlightedTile.setBackground(Color.cyan);
             highlightPieces(highlightedTile.coordinates);
         }else{
@@ -129,6 +130,7 @@ public class Frame implements ActionListener{
                     t.setText(highlightedTile.getText());
                     t.piece.setTeam(highlightedTile.piece.getTeam());
                     t.piece.setType(highlightedTile.piece.getType());
+                    t.piece.incrementMove();
                     dehighlightPieces(highlightedTile.coordinates);
                     highlightedTile.piece.setTeam("no team");
                     highlightedTile.piece.setType("no type");
@@ -139,7 +141,7 @@ public class Frame implements ActionListener{
                 }
             }
         }
-
+        highlightedTile.setText(highlightedTile.piece.text);
     }
     
     private void setPiece(Coordinates c,String type, String team){

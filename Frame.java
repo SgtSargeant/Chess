@@ -62,15 +62,17 @@ public class Frame implements ActionListener{
         LinkedList<Coordinates> toHighlight = (board[buttonToHighlight.x][buttonToHighlight.y].piece).testingMoves(buttonToHighlight,board,board[buttonToHighlight.x][buttonToHighlight.y].piece.type);
         for(int len = 0; len < toHighlight.size(); len++){
             Color highlightColour = Color.cyan;
-                
-
             try{
-                if(board[toHighlight.get(len).x][toHighlight.get(len).y].getPiece().getTeam() == board[buttonToHighlight.x][buttonToHighlight.y].getPiece().getTeam()){
+                if(board[toHighlight.get(len).x][toHighlight.get(len).y].piece.chessTeam == board[buttonToHighlight.x][buttonToHighlight.y].getPiece().getTeam()){
                     highlightColour = Color.green;
                 }else{
                     if(board[toHighlight.get(len).x][toHighlight.get(len).y].getPiece().getTeam() == "no team"){
                         highlightColour = Color.cyan;
                     }else{
+                        if(board[toHighlight.get(len).x][toHighlight.get(len).y].piece.type == "King"){
+                        System.out.println(board[toHighlight.get(len).x][toHighlight.get(len).y].piece.chessTeam + " is in Check");
+                        
+                        }
                         highlightColour = Color.red;
                     }
                     
@@ -141,7 +143,10 @@ public class Frame implements ActionListener{
                 }
             }
         }
-        highlightedTile.setText(highlightedTile.piece.text);
+        if(highlightedTile.getText() != "no piece"){
+            highlightedTile.setText(highlightedTile.piece.text);
+        }
+        
     }
     
     private void setPiece(Coordinates c,String type, String team){
@@ -181,7 +186,19 @@ public class Frame implements ActionListener{
         }
 
     }
-    
+
+    private void swapTeam(){
+        switch(playerTurn){
+            case "Black":
+                playerTurn = "White";
+            break;
+            case "White":
+                playerTurn = "Black";
+            break;
+            default:
+            break;
+        }
+    }
     
     
 }
